@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="square conquer.svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient1288"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop1286" />
+    </linearGradient>
+    <rect
+       x="80.508929"
+       y="-78.997024"
+       width="75.217262"
+       height="44.60119"
+       id="rect913" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1288"
+       id="linearGradient1306"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.4223207,0,0,2.4223207,-26.113022,675.38846)"
+       x1="-80.185586"
+       y1="-474.44657"
+       x2="116.93574"
+       y2="-474.44657" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.24748737"
+     inkscape:cx="472.65315"
+     inkscape:cy="-522.17254"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#caffff;fill-opacity:1;fill-rule:evenodd;stroke-width:3.63189;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000;stroke:#000000"
+       id="rect1284"
+       width="590.58533"
+       height="681.00275"
+       x="-269.10025"
+       y="-504.60486"
+       ry="2.769129" />
+    <rect
+       style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:4.54967;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1273"
+       width="27.6803"
+       height="24.612122"
+       x="125.94118"
+       y="-290.08838"
+       ry="3.7685151" />
+    <rect
+       style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:4.54967;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1271"
+       width="27.6803"
+       height="24.612122"
+       x="125.94118"
+       y="-308.17355"
+       ry="3.7685151" />
+    <rect
+       style="opacity:1;fill:#0088ff;fill-opacity:1;fill-rule:evenodd;stroke-width:4.54967;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1267"
+       width="27.6803"
+       height="24.612122"
+       x="104.78786"
+       y="-253.91808"
+       ry="3.7685151" />
+    <rect
+       style="opacity:1;fill:#0088ff;fill-opacity:1;fill-rule:evenodd;stroke-width:4.54967;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1265"
+       width="27.6803"
+       height="24.612122"
+       x="104.78786"
+       y="-272.00323"
+       ry="3.7685151" />
+    <rect
+       style="opacity:1;fill:#0088ff;fill-opacity:1;fill-rule:evenodd;stroke-width:4.54967;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1263"
+       width="27.6803"
+       height="24.612122"
+       x="104.78786"
+       y="-290.08838"
+       ry="3.7685151" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="99.825172"
+       y="77.641792"
+       id="text839"><tspan
+         sodipodi:role="line"
+         x="99.825172"
+         y="77.641792"
+         style="stroke-width:0.264583"
+         id="tspan845" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="68.688263"
+       y="55.458424"
+       id="text855"><tspan
+         sodipodi:role="line"
+         id="tspan853"
+         x="68.688263"
+         y="55.458424"
+         style="stroke-width:0.264583" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="125.71278"
+       y="-90.147308"
+       id="text861"><tspan
+         sodipodi:role="line"
+         id="tspan859"
+         x="125.71278"
+         y="-90.147308"
+         style="stroke-width:0.264583">client code</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="-111.0034"
+       y="-90.147308"
+       id="text865"><tspan
+         sodipodi:role="line"
+         x="-111.0034"
+         y="-90.147308"
+         style="stroke-width:0.264583"
+         id="tspan867">server code</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="62.541069"
+       y="-67.455551"
+       id="text873"><tspan
+         sodipodi:role="line"
+         id="tspan871"
+         x="62.541069"
+         y="-67.455551"
+         style="stroke-width:0.264583">graphics rendering</tspan><tspan
+         sodipodi:role="line"
+         x="62.541069"
+         y="-55.108334"
+         style="stroke-width:0.264583"
+         id="tspan881"> thread</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="194.07678"
+       y="-67.455551"
+       id="text877"><tspan
+         sodipodi:role="line"
+         id="tspan875"
+         x="194.07678"
+         y="-67.455551"
+         style="stroke-width:0.264583">sned/recv to/from </tspan><tspan
+         sodipodi:role="line"
+         x="194.07678"
+         y="-55.108334"
+         style="stroke-width:0.264583"
+         id="tspan879">server thread</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="63.5"
+       y="-115.66071"
+       id="text885"><tspan
+         sodipodi:role="line"
+         id="tspan883"
+         x="63.5"
+         y="-115.66071"
+         style="stroke-width:0.264583" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="206.375"
+       y="-29.482121"
+       id="text889"><tspan
+         sodipodi:role="line"
+         id="tspan887"
+         x="206.375"
+         y="-29.482121"
+         style="stroke-width:0.264583">modifies boolians according</tspan><tspan
+         sodipodi:role="line"
+         x="206.375"
+         y="-17.134909"
+         style="stroke-width:0.264583"
+         id="tspan893">the information that has been</tspan><tspan
+         sodipodi:role="line"
+         x="206.375"
+         y="-4.7876959"
+         style="stroke-width:0.264583"
+         id="tspan897">sent that let's the sent and </tspan><tspan
+         sodipodi:role="line"
+         x="206.375"
+         y="7.5595179"
+         style="stroke-width:0.264583"
+         id="tspan899">recieved</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="53.672619"
+       y="-29.482121"
+       id="text909"><tspan
+         sodipodi:role="line"
+         x="53.672619"
+         y="-29.482121"
+         style="stroke-width:0.264583"
+         id="tspan926">animte the objects in</tspan><tspan
+         sodipodi:role="line"
+         x="53.672619"
+         y="-17.134909"
+         style="stroke-width:0.264583"
+         id="tspan930">the game, checks the</tspan><tspan
+         sodipodi:role="line"
+         x="53.672619"
+         y="-4.7876959"
+         style="stroke-width:0.264583"
+         id="tspan932">mouse events, react</tspan><tspan
+         sodipodi:role="line"
+         x="53.672619"
+         y="7.5595179"
+         style="stroke-width:0.264583"
+         id="tspan934">to the bolinas from</tspan><tspan
+         sodipodi:role="line"
+         x="53.672619"
+         y="19.906731"
+         style="stroke-width:0.264583"
+         id="tspan936">the other thread and</tspan><tspan
+         sodipodi:role="line"
+         x="53.672619"
+         y="32.253944"
+         style="stroke-width:0.264583"
+         id="tspan938">modify the game </tspan><tspan
+         sodipodi:role="line"
+         x="53.672619"
+         y="44.601158"
+         style="stroke-width:0.264583"
+         id="tspan940">accordingly</tspan></text>
+    <text
+       xml:space="preserve"
+       id="text911"
+       style="line-height:1.25;font-family:sans-serif;font-size:9.87777778px;text-align:center;white-space:pre;shape-inside:url(#rect913)" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="-184.11183"
+       y="-59.342266"
+       id="text944"><tspan
+         sodipodi:role="line"
+         x="-184.11183"
+         y="-59.342266"
+         style="stroke-width:0.264583"
+         id="tspan946">the listening thread</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="-183.35016"
+       y="-47.143063"
+       id="text952"><tspan
+         sodipodi:role="line"
+         id="tspan950"
+         x="-183.35016"
+         y="-47.143063"
+         style="stroke-width:0.264583">listen for clients to </tspan><tspan
+         sodipodi:role="line"
+         x="-183.35016"
+         y="-34.795849"
+         style="stroke-width:0.264583"
+         id="tspan954">connect, manages</tspan><tspan
+         sodipodi:role="line"
+         x="-183.35016"
+         y="-22.448637"
+         style="stroke-width:0.264583"
+         id="tspan968">opening games for </tspan><tspan
+         sodipodi:role="line"
+         x="-183.35016"
+         y="-10.101424"
+         style="stroke-width:0.264583"
+         id="tspan976">each two clients</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="-74.264053"
+       y="-59.342266"
+       id="text982"><tspan
+         sodipodi:role="line"
+         x="-74.264053"
+         y="-59.342266"
+         style="stroke-width:0.264583"
+         id="tspan980">clients thread</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="-73.502373"
+       y="-47.143063"
+       id="text992"><tspan
+         sodipodi:role="line"
+         x="-73.502373"
+         y="-47.143063"
+         style="stroke-width:0.264583"
+         id="tspan990">for each client</tspan><tspan
+         sodipodi:role="line"
+         x="-73.502373"
+         y="-34.795849"
+         style="stroke-width:0.264583"
+         id="tspan1003">that has connected</tspan><tspan
+         sodipodi:role="line"
+         x="-73.502373"
+         y="-22.448637"
+         style="stroke-width:0.264583"
+         id="tspan1005">there is a thread</tspan><tspan
+         sodipodi:role="line"
+         x="-73.502373"
+         y="-10.101424"
+         style="stroke-width:0.264583"
+         id="tspan1007">that send and recieve</tspan><tspan
+         sodipodi:role="line"
+         x="-73.502373"
+         y="2.2457876"
+         style="stroke-width:0.264583"
+         id="tspan1009">data from that client</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:23.927px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke:#ff5555;stroke-width:2.42233;stroke-miterlimit:4;stroke-dasharray:none;fill:#ffcb00;fill-opacity:1;"
+       x="18.549191"
+       y="-467.2547"
+       id="text1013"
+       transform="scale(0.99879155,1.0012099)"><tspan
+         sodipodi:role="line"
+         id="tspan1011"
+         x="18.549189"
+         y="-467.2547"
+         style="stroke:#ff5555;stroke-width:2.42233;stroke-miterlimit:4;stroke-dasharray:none;fill:#ffcb00;fill-opacity:1;">what is this game and how you play it ?</tspan></text>
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1015"
+       width="6.5269771"
+       height="6.5269771"
+       x="104.78786"
+       y="-444.87259"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1017"
+       width="6.5269771"
+       height="6.5269771"
+       x="125.94118"
+       y="-444.87259"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1021"
+       width="6.5269771"
+       height="6.5269771"
+       x="147.09448"
+       y="-444.87259"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1025"
+       width="6.5269771"
+       height="6.5269771"
+       x="168.24782"
+       y="-444.87259"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1029"
+       width="6.5269771"
+       height="6.5269771"
+       x="189.40114"
+       y="-444.87259"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1031"
+       width="6.5269771"
+       height="6.5269771"
+       x="104.78786"
+       y="-426.78741"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1033"
+       width="6.5269771"
+       height="6.5269771"
+       x="125.94118"
+       y="-426.78741"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1035"
+       width="6.5269771"
+       height="6.5269771"
+       x="147.09448"
+       y="-426.78741"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1037"
+       width="6.5269771"
+       height="6.5269771"
+       x="168.24782"
+       y="-426.78741"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1039"
+       width="6.5269771"
+       height="6.5269771"
+       x="189.40114"
+       y="-426.78741"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1061"
+       width="6.5269771"
+       height="6.5269771"
+       x="104.78786"
+       y="-408.70227"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1063"
+       width="6.5269771"
+       height="6.5269771"
+       x="125.94118"
+       y="-408.70227"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1065"
+       width="6.5269771"
+       height="6.5269771"
+       x="147.09448"
+       y="-408.70227"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1067"
+       width="6.5269771"
+       height="6.5269771"
+       x="168.24782"
+       y="-408.70227"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1069"
+       width="6.5269771"
+       height="6.5269771"
+       x="189.40114"
+       y="-408.70227"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1081"
+       width="6.5269771"
+       height="6.5269771"
+       x="104.78786"
+       y="-390.6171"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1083"
+       width="6.5269771"
+       height="6.5269771"
+       x="125.94118"
+       y="-390.6171"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1085"
+       width="6.5269771"
+       height="6.5269771"
+       x="147.09448"
+       y="-390.6171"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1087"
+       width="6.5269771"
+       height="6.5269771"
+       x="168.24782"
+       y="-390.6171"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1089"
+       width="6.5269771"
+       height="6.5269771"
+       x="189.40114"
+       y="-390.6171"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1101"
+       width="6.5269771"
+       height="6.5269771"
+       x="104.78786"
+       y="-372.53195"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1103"
+       width="6.5269771"
+       height="6.5269771"
+       x="125.94118"
+       y="-372.53195"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1105"
+       width="6.5269771"
+       height="6.5269771"
+       x="147.09448"
+       y="-372.53195"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1107"
+       width="6.5269771"
+       height="6.5269771"
+       x="168.24782"
+       y="-372.53195"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1109"
+       width="6.5269771"
+       height="6.5269771"
+       x="189.40114"
+       y="-372.53195"
+       ry="0.29735631" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="-80.508926"
+       y="-436.94046"
+       id="text1113"><tspan
+         sodipodi:role="line"
+         id="tspan1111"
+         x="-80.508926"
+         y="-436.94046"
+         style="stroke-width:0.264583">it's a turn based multiplayer game for two players </tspan><tspan
+         sodipodi:role="line"
+         x="-80.508934"
+         y="-424.59326"
+         style="stroke-width:0.264583"
+         id="tspan1115">(can be for more than 2 , but I intend to implement </tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-412.24603"
+         style="stroke-width:0.264583"
+         id="tspan1119">for 2) you start with a board full of dots and in each </tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-399.89883"
+         style="stroke-width:0.264583"
+         id="tspan1127">the plaeyer should click on a line between two dots</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-387.55161"
+         style="stroke-width:0.264583"
+         id="tspan1185">so it shows on the screen. if in your turn you comlete</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-375.20441"
+         style="stroke-width:0.264583"
+         id="tspan1135">a square you conguer it , and it become your terretory</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-362.85718"
+         style="stroke-width:0.264583"
+         id="tspan1143">and what inside the square becomes yours (there is</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508919"
+         y="-350.50998"
+         style="stroke-width:0.264583"
+         id="tspan1147">nothing now inside the squares in the illustration on</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508934"
+         y="-338.16275"
+         style="stroke-width:0.264583"
+         id="tspan1155">the left but there will be in the real game), also if you</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-325.81555"
+         style="stroke-width:0.264583"
+         id="tspan1161">complete a square in your turn you get another turn </tspan><tspan
+         sodipodi:role="line"
+         x="-80.508934"
+         y="-313.46832"
+         style="stroke-width:0.264583"
+         id="tspan1165">and continue to play, the things inside the squares are</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508934"
+         y="-301.12112"
+         style="stroke-width:0.264583"
+         id="tspan1167">stuff that give you money: for example a chest of gold</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-288.7739"
+         style="stroke-width:0.264583"
+         id="tspan1171">that give you a certain amount of money instantly</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-276.4267"
+         style="stroke-width:0.264583"
+         id="tspan1175">after you find it, and a factory that each turn gives</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-264.07947"
+         style="stroke-width:0.264583"
+         id="tspan1195">you a certain amount of money.</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-251.73227"
+         style="stroke-width:0.264583"
+         id="tspan1199">the game is finished when all the squares are conqured</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-239.38506"
+         style="stroke-width:0.264583"
+         id="tspan1201">and the winner is the player that has the biggest amount</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508934"
+         y="-227.03784"
+         style="stroke-width:0.264583"
+         id="tspan1203">of money, if they have the same amount it's a draw!</tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-214.69063"
+         style="stroke-width:0.264583"
+         id="tspan1308">this game is inspired by this game on y8: </tspan><tspan
+         sodipodi:role="line"
+         x="-80.508926"
+         y="-202.34341"
+         style="stroke-width:0.264583"
+         id="tspan1183">https://he.y8.com/games/dots_</tspan></text>
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1205"
+       width="6.5269771"
+       height="6.5269771"
+       x="104.78786"
+       y="-308.17355"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:5.44904;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1207"
+       width="6.5269771"
+       height="24.61215"
+       x="125.94118"
+       y="-308.17355"
+       ry="1.1212814" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:5.44904;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1209"
+       width="6.5269771"
+       height="24.61215"
+       x="147.09448"
+       y="-308.17355"
+       ry="1.1212814" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1211"
+       width="6.5269771"
+       height="6.5269771"
+       x="168.24782"
+       y="-308.17355"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:5.77871;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1213"
+       width="27.680298"
+       height="6.5269771"
+       x="168.24782"
+       y="-308.17355"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:5.77871;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1215"
+       width="27.680296"
+       height="6.5269771"
+       x="104.78786"
+       y="-290.08838"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:8.56317;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1217"
+       width="6.5269771"
+       height="60.782433"
+       x="125.94118"
+       y="-290.08838"
+       ry="2.7691286" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1219"
+       width="6.5269771"
+       height="6.5269771"
+       x="147.09448"
+       y="-290.08838"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:7.67547;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1221"
+       width="48.833618"
+       height="6.5269771"
+       x="125.94118"
+       y="-290.08838"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:8.56317;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1223"
+       width="6.5269771"
+       height="60.782471"
+       x="189.40114"
+       y="-308.17355"
+       ry="2.7691305" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:7.67547;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1225"
+       width="48.833607"
+       height="6.5269771"
+       x="104.78786"
+       y="-272.00323"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1227"
+       width="6.5269771"
+       height="6.5269771"
+       x="125.94118"
+       y="-272.00323"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1229"
+       width="6.5269771"
+       height="6.5269771"
+       x="147.09448"
+       y="-272.00323"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:5.77871;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1231"
+       width="27.680298"
+       height="6.5269771"
+       x="168.24782"
+       y="-272.00323"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1233"
+       width="6.5269771"
+       height="6.5269771"
+       x="189.40114"
+       y="-272.00323"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:5.77871;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1235"
+       width="27.680296"
+       height="6.5269771"
+       x="104.78786"
+       y="-253.91808"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1237"
+       width="6.5269771"
+       height="6.5269771"
+       x="125.94118"
+       y="-253.91808"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:7.17704;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1239"
+       width="6.5269771"
+       height="42.697296"
+       x="147.09448"
+       y="-290.08838"
+       ry="1.9452053" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:5.44904;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1241"
+       width="6.5269771"
+       height="24.61212"
+       x="168.24782"
+       y="-253.91808"
+       ry="1.1212801" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1243"
+       width="6.5269771"
+       height="6.5269771"
+       x="189.40114"
+       y="-253.91808"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:8.56317;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1245"
+       width="6.5269771"
+       height="60.78244"
+       x="104.78786"
+       y="-290.08838"
+       ry="2.769129" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1247"
+       width="6.5269771"
+       height="6.5269771"
+       x="125.94118"
+       y="-235.83293"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:2.80609;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1249"
+       width="6.5269771"
+       height="6.5269771"
+       x="147.09448"
+       y="-235.83293"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:9.1887;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1251"
+       width="69.986938"
+       height="6.5269771"
+       x="104.78786"
+       y="-235.83293"
+       ry="0.29735631" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:5.44904;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1253"
+       width="6.5269771"
+       height="24.612122"
+       x="189.40114"
+       y="-253.91808"
+       ry="1.1212801" />
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-width:5.77871;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect1269"
+       width="27.680298"
+       height="6.5269771"
+       x="125.94118"
+       y="-308.17355"
+       ry="0.29735631" />
+    <path
+       id="rect1277"
+       style="opacity:1;fill:#ffcb00;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.79405;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       d="m 148.27607,-350.10977 c -0.9202,0 -1.66088,0.74067 -1.66088,1.6609 v 10.24278 h -7.46156 l 11.34246,13.77228 11.34298,-13.77228 h -7.78506 v -10.24278 c 0,-0.92023 -0.74068,-1.6609 -1.66088,-1.6609 z" />
+    <text
+       xml:space="preserve"
+       style="font-size:23.927px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#ffcb00;fill-opacity:1;stroke:#ff5555;stroke-width:2.42233;stroke-miterlimit:4;stroke-dasharray:none"
+       x="18.549191"
+       y="-162.16534"
+       id="text1316"
+       transform="scale(0.99879156,1.0012099)"><tspan
+         sodipodi:role="line"
+         id="tspan1314"
+         x="18.549189"
+         y="-162.16534"
+         style="fill:#ffcb00;fill-opacity:1;stroke:#ff5555;stroke-width:2.42233;stroke-miterlimit:4;stroke-dasharray:none">implementation</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
+       x="6.0476193"
+       y="-130.77975"
+       id="text1320"><tspan
+         sodipodi:role="line"
+         x="6.0476236"
+         y="-130.77975"
+         style="stroke-width:0.264583"
+         id="tspan1322">the game will be implemented using python: pygame, socket, _thread</tspan></text>
+  </g>
+</svg>
