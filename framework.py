@@ -1,14 +1,17 @@
+import time
 import pygame
 import copy
-
+import random
 
 class Entity:
     def __init__(self, name, animations_pack):
         self.name = name
-        self.transform = Transform()
+        self.transform = self.Transform()
         self.animator = None
-        if animations_pack != None:
-            self.animator = Animator(animations_pack)
+        self.kinematics = None
+        if animations_pack is not None:
+            self.animator = self.Animator(animations_pack)
+
     def copy(self):
         animations_pack = self.animator.animations_pack
         self.animator.animations_pack = None
@@ -16,82 +19,132 @@ class Entity:
         new_entity.animator.animations_pack = animations_pack
         return new_entity
 
-class Transform:
-    def __init__(self):
-        self.position = {'x': 0,'y': 0}
-        self.scale = {'x': 1,'y': 1}
+    def add_kinematics(self, x_velocity=0, y_velocity=0, x_acceleration=0, y_acceleration=0):
+        self.kinematics = self.Kinematics(x_velocity, y_velocity, x_acceleration, y_acceleration)
 
-    def set_positiono(self, x, y):
-        self.position['x'] = x
-        self.position['y'] = y
+    def change_position(self, x, y):
+        self.transform.position['x'] = x
+        self.transform.position['y'] = y
 
-    def set_scale(self, x, y):
-        self.scale['x'] = x
-        self.scale['y'] = y
+    def change_velocity(self, x, y):
+        self.kinematics.velocity['x'] = x
+        self.kinematics.velocity['y'] = y
 
+    def change_acceleration(self, x, y):
+        self.kinematics.acceleration['x'] = x
+        self.kinematics.acceleration['y'] = y
 
-class Animator:
-    def __init__(self, animations_pack):
-        self.animations_pack = animations_pack
-        self.current_animation = animations_pack.default_animation
-        self.current_frame = 0
+    def update(self):
+        if self.animator is not None:
+            self.animator.update()
+        if self.kinematics is not None:
+            self.kinematics.velocity['x'] += self.kinematics.acceleration['x'] * GameManager.delta_time
+            self.kinematics.velocity['y'] += self.kinematics.acceleration['y'] * GameManager.delta_time
+            self.transform.position['x'] += self.kinematics.velocity['x'] * GameManager.delta_time
+            self.transform.position['y'] += self.kinematics.velocity['y'] * GameManager.delta_time
+
+    class Transform:
+        def __init__(self):
+            self.position = {'x': 0, 'y': 0}
+            self.scale = {'x': 1, 'y': 1}
+
+        def set_position(self, x, y):
+            self.position['x'] = x
+            self.position['y'] = y
+
+        def set_scale(self, x, y):
+            self.scale['x'] = x
+            self.scale['y'] = y
+
+    class Kinematics:
+        def __init__(self, x_velocity, y_velocity, x_acceleration, y_acceleration):
+            self.velocity = {'x': x_velocity, 'y': y_velocity}
+            self.acceleration = {'x': x_acceleration, 'y': y_acceleration}
+
+    class Animator:
+        def __init__(self, animations_pack):
+            self.animations_pack = animations_pack
+            self.current_animation = animations_pack.default_animation
+            self.current_frame = 0
+            self.last_updated = 0
+
+        def update(self):
+            animation = self.animations_pack.animations[self.current_animation]
+            if GameManager.current_time > self.last_updated + 0.1 / animation.speed:
+                self.last_updated = GameManager.current_time
+                if animation.frames_number > 1:
+                    if self.current_frame < animation.frames_number - 1:
+                        self.current_frame += 1
+                    elif animation.loop:
+                        self.current_frame = 0
 
 
 class Animation:
-    def __init__(self, frames_number, name, file_name, frame_width, frame_height):
-        self.speed = 1
+    def __init__(self, frames_number, file_name, frame_width, frame_height, loop, speed):
+        self.speed = speed
         self.frames_number = frames_number
         self.frames = self.generate_frames(file_name, frame_width, frame_height)
+        self.loop = loop
 
     def generate_frames(self, file_name, frame_width, frame_height):
-        sprite_sheet = pygame.image.load(file_name).convert()
+        sprite_sheet = pygame.image.load(file_name).convert_alpha()
         sheet_width = sprite_sheet.get_width()
         frames = []
-        for frame_index in range(sheet_width//frame_width): # maybe there is a bug here in //
-            frame = pygame.Surface((frame_width, frame_height)).convert()
-            frame.blit(sprite_sheet, (0 , 0), (frame_index * frame_width, 0, frame_width, frame_height))
+        for frame_index in range(sheet_width//frame_width):  # maybe there is a bug here in //
+            frame = pygame.Surface((frame_width, frame_height), pygame.SRCALPHA).convert_alpha()
+            frame.blit(sprite_sheet, (0, 0), (frame_index * frame_width, 0, frame_width, frame_height))
             frames.append(frame)
         return frames
 
 # an animation pack is a set of animations for a type of entity , multiple entities from the same type can share
 # the same animation pack since it's the same for of all of them, and no need to load
 # spritesheets again and again for each one (flyweight design pattern)
-class Animations_pack:
+
+
+class AnimationsPack:
     def __init__(self):
-        self.idle_animation = None
+        self.default_animation = None
         self.animations = {}
 
-    def add_animation(self, frames_number, name, file_name, frame_width, frame_height):
-        new_animation = Animation(frames_number, name, file_name, frame_width, frame_height)
-        if self.idle_animation == None:
+    def add_animation(self, frames_number, name, file_name, frame_width, frame_height, loop, speed):
+        new_animation = Animation(frames_number, file_name, frame_width, frame_height, loop, speed)
+        if self.default_animation is None:
             self.default_animation = name
         self.animations[name] = new_animation
 
     def set_default_animation(self, name):
         self.default_animation = name
 
+
 class Scene:
     def __init__(self):
         self.initial_entities = {}
-        self.entities = {}
-
-    def restart_scene(self):
-        entities = copy.deepcopy(self.initial_entities)
+        self.active_entities = {}
 
     def add_initial_entity(self, entity):
         self.initial_entities[entity.name] = entity
-        new_entity = entity.copy()
-        self.add_entity(new_entity)
 
-    def add_entity(self, entity):
-        self.entities[entity.name] = entity
+    def add_active_entity(self, entity):
+        self.active_entities[entity.name] = entity
+
+    def start(self):
+        for entity_name in self.initial_entities:
+            new_entity = self.initial_entities[entity_name]
+            self.add_active_entity(new_entity)
+
+    def end(self):
+        self.active_entities = {}
+
 
 class GameManager:
-    clock = pygame.time.Clock()
-    fps = 60
-    win = None
     current_scene = None
     scenes = {}
+    fps = 60
+    clock = pygame.time.Clock()
+    current_time = 0
+    last_time = 0
+    delta_time = 0
+    win = None
     animations_packs = {}
     run = True
 
@@ -102,10 +155,23 @@ class GameManager:
         cls.run_game()
 
     @classmethod
+    def update_time(cls):
+        cls.clock.tick(cls.fps)
+        cls.current_time = time.time()
+        cls.delta_time = cls.current_time - cls.last_time
+        cls.last_time = cls.current_time
+
+    @classmethod
+    def start_time(cls):
+        cls.last_time = cls.current_time = time.time()
+
+    @classmethod
     def run_game(cls):
         Game.start()
-        while cls.run == True:
-
+        cls.scenes[cls.current_scene].start()
+        cls.start_time()
+        while cls.run:
+            cls.update_time()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     cls.run = False
@@ -115,14 +181,21 @@ class GameManager:
 
     @classmethod
     def draw_entities(cls):
-        entities = cls.scenes[cls.current_scene].entities
+        white = (255, 255, 255)
+        cls.win.fill(white)
+        entities = cls.scenes[cls.current_scene].active_entities
         for entity_name in entities:
             entity = entities[entity_name]
-            current_animation = entity.animator.animations_pack.animations[entity.animator.current_animation]
-            current_frame = current_animation.frames[entity.animator.current_frame]
-            x = entity.transform.position['x']
-            y = entity.transform.position['y']
-            cls.win.blit(current_frame, (x,y))
+            entity.update()
+            if entity.animator is not None:
+                current_animation = entity.animator.animations_pack.animations[entity.animator.current_animation]
+                current_frame = current_animation.frames[entity.animator.current_frame]
+                x = entity.transform.position['x']
+                y = entity.transform.position['y']
+                width = current_frame.get_width() * entity.transform.scale['x']
+                height = current_frame.get_height() * entity.transform.scale['y']
+                scaled_frame = pygame.transform.scale(current_frame, (width, height))
+                cls.win.blit(scaled_frame, (x, y))
         pygame.display.update()
 
     # transition to another scene
@@ -134,59 +207,73 @@ class GameManager:
     @classmethod
     def create_new_scene(cls, scene):
         cls.scenes[scene] = Scene()
+        return cls.scenes[scene]
 
     # adds new animation pack to the game
     @classmethod
-    def create_new_type(cls, type):
-        cls.animations_packs[type] = Animations_pack()
+    def create_new_type(cls, kind):
+        cls.animations_packs[kind] = AnimationsPack()
 
     # adds animation to a animation pack
     @classmethod
-    def create_new_animaton(cls, type, frames_number, name, file_name, frame_width, frame_height):
-        cls.animations_packs[type].add_animation(frames_number, name, file_name, frame_width, frame_height)
+    def create_new_animaton(cls, kind, frames_number, name, file_name, frame_width, frame_height, loop, speed):
+        cls.animations_packs[kind].add_animation(frames_number, name, file_name, frame_width, frame_height, loop, speed)
 
     # create an entity of the game , this function can be used in 2 ways
-    # 1) add an entity to a scene that each time you load the scene , the scene starts with this entity (status = "initial")
+    # 1) add an entity to a scene that each time you load the scene , the scene starts with this entity
+    #   (status = "initial")
     # 2) add an entity in the middle of the game while the game is running (status = "temporary"
     @classmethod
-    def create_new_entity(cls, type, name, status="temporary"):
-        entity = Entity(name, cls.animations_packs[type])
+    def create_new_entity(cls, kind, name, status="temporary"):
+        entity = Entity(name, cls.animations_packs[kind])
         if status == "initial":
             cls.scenes[cls.current_scene].add_initial_entity(entity)
         else:
             cls.scenes[cls.current_scene].add_entity(entity)
-
-
-
-
+        return entity
 
 
 # framework executable code --------------------------------
 class Game:
     name = "new game ($ v $)"
+    scene = None
+    speed = 100
+    trunks_number = 300
 
     @classmethod
     def start(cls):
-        GameManager.create_new_scene("example scene")
+        cls.scene = GameManager.create_new_scene("example scene")
         GameManager.change_current_scene("example scene")
-        GameManager.create_new_type("face")
-        GameManager.create_new_animaton("face", 5, "talk", "animations/lip syncing.png", 400, 307)
-        GameManager.create_new_entity("face", "face1", "initial")
+        GameManager.create_new_type("trunk")
+        GameManager.create_new_animaton("trunk", 6, "happy", "animations/happy trunk.png", 32, 32, True, 1)
+        trunks = []
+        for i in range(cls.trunks_number):
+            cls.speed = random.randint(100, 500)
+            trunks.append(GameManager.create_new_entity("trunk", "trunk" + str(i), "initial"))
+            trunks[i].add_kinematics(cls.speed, cls.speed)
+            trunks[i].transform.set_scale(5, 5)
 
     @classmethod
     def update(cls):
-        x = 5
+        for i in range(cls.trunks_number):
+            cls.speed = random.randint(100, 300)
+            t = cls.scene.active_entities["trunk" + str(i)]
+            w, h = pygame.display.get_surface().get_size()
+            if t.transform.position['x'] > w - 32 * 5:
+                t.change_velocity(-cls.speed, t.kinematics.velocity['y'])
+                #t.change_acceleration(-10000, t.kinematics.acceleration['y'])
+            elif t.transform.position['x'] < 0:
+                t.change_velocity(cls.speed, t.kinematics.velocity['y'])
+                #t.change_acceleration(10000, t.kinematics.acceleration['y'])
+
+            if t.transform.position['y'] > h - 32 * 5:
+                t.change_velocity(t.kinematics.velocity['x'], -cls.speed)
+                #t.change_acceleration(t.kinematics.acceleration['x'], -10000)
+            elif t.transform.position['y'] < 0:
+                t.change_velocity(t.kinematics.velocity['x'], cls.speed)
+                #t.change_acceleration(t.kinematics.acceleration['x'], 10000)
+
 GameManager.init()
-
-
-
-
-
-
-
-
-
-
 
 
 """
