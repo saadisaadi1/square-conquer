@@ -3,8 +3,13 @@ import pygame
 import copy
 import random
 
+
 class Entity:
     def __init__(self, name, animations_pack):
+        self.children = []
+        self.scene = GameManager.current_scene
+        self.switch = False
+        self.father = None
         self.name = name
         self.transform = self.Transform()
         self.animator = None
@@ -19,20 +24,36 @@ class Entity:
         new_entity.animator.animations_pack = animations_pack
         return new_entity
 
+    def set_father(self, father):
+        self.father = father
+        GameManager.scenes[self.scene].initial_entities[father].children.append(self.name)
+
     def add_kinematics(self, x_velocity=0, y_velocity=0, x_acceleration=0, y_acceleration=0):
         self.kinematics = self.Kinematics(x_velocity, y_velocity, x_acceleration, y_acceleration)
 
-    def change_position(self, x, y):
-        self.transform.position['x'] = x
-        self.transform.position['y'] = y
+    def set_velocity(self, x, y):
+        for child_name in self.children:
+            child = GameManager.scenes[self.scene].active_entities[child_name]
+            child.set_velocity(x + child.kinematics.velocity['x'] - self.kinematics.velocity['x'],
+                                  y + child.kinematics.velocity['y'] - self.kinematics.velocity['y'])
+        if self.kinematics is not None:
+            self.kinematics.velocity['x'] = x
+            self.kinematics.velocity['y'] = y
 
-    def change_velocity(self, x, y):
-        self.kinematics.velocity['x'] = x
-        self.kinematics.velocity['y'] = y
+    def set_acceleration(self, x, y):
+        for child_name in self.children:
+            child = GameManager.scenes[self.scene].active_entities[child_name]
+            child.set_acceleration(x + child.kinematics.acceleration['x'] - self.kinematics.acceleration['x'],
+                                  y + child.kinematics.acceleration['y'] - self.kinematics.acceleration['y'])
+        if self.kinematics is not None:
+            self.kinematics.acceleration['x'] = x
+            self.kinematics.acceleration['y'] = y
 
-    def change_acceleration(self, x, y):
-        self.kinematics.acceleration['x'] = x
-        self.kinematics.acceleration['y'] = y
+    def updated(self):
+        return self.switch == GameManager.entity_update_switch
+
+    def flip_switch(self):
+        self.switch = not self.switch
 
     def update(self):
         if self.animator is not None:
@@ -43,18 +64,26 @@ class Entity:
             self.transform.position['x'] += self.kinematics.velocity['x'] * GameManager.delta_time
             self.transform.position['y'] += self.kinematics.velocity['y'] * GameManager.delta_time
 
+    def set_position(self, x, y):
+        for child_name in self.children:
+            child = GameManager.scenes[self.scene].active_entities[child_name]
+            child.set_position(x + child.transform.position['x'] - self.transform.position['x'],
+                                  y + child.transform.position['y'] - self.transform.position['y'])
+        self.transform.position['x'] = x
+        self.transform.position['y'] = y
+
+    def set_scale(self, x, y):
+        for child_name in self.children:
+            child = GameManager.scenes[self.scene].active_entities[child_name]
+            child.set_scale(x * child.transform.scale['x'] / self.transform.scale['x'],
+                                  y * child.transform.scale['y'] / self.transform.scale['y'])
+        self.transform.scale['x'] = x
+        self.transform.scale['y'] = y
+
     class Transform:
         def __init__(self):
             self.position = {'x': 0, 'y': 0}
             self.scale = {'x': 1, 'y': 1}
-
-        def set_position(self, x, y):
-            self.position['x'] = x
-            self.position['y'] = y
-
-        def set_scale(self, x, y):
-            self.scale['x'] = x
-            self.scale['y'] = y
 
     class Kinematics:
         def __init__(self, x_velocity, y_velocity, x_acceleration, y_acceleration):
@@ -78,6 +107,8 @@ class Entity:
                     elif animation.loop:
                         self.current_frame = 0
 
+        def change_animation(self, animation):
+            self.current_animation = animation
 
 class Animation:
     def __init__(self, frames_number, file_name, frame_width, frame_height, loop, speed):
@@ -85,6 +116,7 @@ class Animation:
         self.frames_number = frames_number
         self.frames = self.generate_frames(file_name, frame_width, frame_height)
         self.loop = loop
+        self.frame_size = {'x': frame_width, 'y': frame_height}
 
     def generate_frames(self, file_name, frame_width, frame_height):
         sprite_sheet = pygame.image.load(file_name).convert_alpha()
@@ -137,6 +169,7 @@ class Scene:
 
 
 class GameManager:
+    entity_update_switch = True
     current_scene = None
     scenes = {}
     fps = 60
@@ -153,6 +186,9 @@ class GameManager:
         pygame.init()
         cls.win = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         cls.run_game()
+    @classmethod
+    def flip_switch(cls):
+        cls.entity_update_switch = not cls.entity_update_switch
 
     @classmethod
     def update_time(cls):
@@ -197,7 +233,6 @@ class GameManager:
                 scaled_frame = pygame.transform.scale(current_frame, (width, height))
                 cls.win.blit(scaled_frame, (x, y))
         pygame.display.update()
-
     # transition to another scene
     @classmethod
     def change_current_scene(cls, scene):
@@ -235,43 +270,62 @@ class GameManager:
 
 # framework executable code --------------------------------
 class Game:
+    son1 = None
     name = "new game ($ v $)"
     scene = None
     speed = 100
-    trunks_number = 300
-
+    trunks_number = 1
+    scale = 1
+    pixels = 64
+    son = None
+    start_time = None
+    changed_position = False
     @classmethod
     def start(cls):
         cls.scene = GameManager.create_new_scene("example scene")
         GameManager.change_current_scene("example scene")
         GameManager.create_new_type("trunk")
-        GameManager.create_new_animaton("trunk", 6, "happy", "animations/happy trunk.png", 32, 32, True, 1)
+        GameManager.create_new_animaton("trunk", 5, "happy", "animations/human idle.png", cls.pixels, cls.pixels, True, 2)
         trunks = []
         for i in range(cls.trunks_number):
             cls.speed = random.randint(100, 500)
             trunks.append(GameManager.create_new_entity("trunk", "trunk" + str(i), "initial"))
             trunks[i].add_kinematics(cls.speed, cls.speed)
-            trunks[i].transform.set_scale(5, 5)
-
+            trunks[i].set_scale(cls.scale, cls.scale)
+        cls.son = GameManager.create_new_entity("trunk", "son", "initial")
+        cls.son.add_kinematics(cls.speed, cls.speed)
+        cls.son.set_father("trunk0")
+        cls.son.set_position(100, 100)
+        cls.start_time = time.time()
+        cls.son1 = GameManager.create_new_entity("trunk", "son1", "initial")
+        cls.son1.add_kinematics(cls.speed, cls.speed)
+        cls.son1.set_father("son")
+        cls.son1.set_position(200, 200)
+        cls.start_time = time.time()
     @classmethod
     def update(cls):
         for i in range(cls.trunks_number):
-            cls.speed = random.randint(100, 300)
+            cls.speed = random.randint(100, 500)
             t = cls.scene.active_entities["trunk" + str(i)]
             w, h = pygame.display.get_surface().get_size()
-            if t.transform.position['x'] > w - 32 * 5:
-                t.change_velocity(-cls.speed, t.kinematics.velocity['y'])
-                #t.change_acceleration(-10000, t.kinematics.acceleration['y'])
+            if t.transform.position['x'] > w - cls.pixels * cls.scale:
+                t.set_velocity(-cls.speed, t.kinematics.velocity['y'])
+                #t.set_acceleration(-10000, t.kinematics.acceleration['y'])
             elif t.transform.position['x'] < 0:
-                t.change_velocity(cls.speed, t.kinematics.velocity['y'])
-                #t.change_acceleration(10000, t.kinematics.acceleration['y'])
+                t.set_velocity(cls.speed, t.kinematics.velocity['y'])
+                #t.set_acceleration(10000, t.kinematics.acceleration['y'])
 
-            if t.transform.position['y'] > h - 32 * 5:
-                t.change_velocity(t.kinematics.velocity['x'], -cls.speed)
-                #t.change_acceleration(t.kinematics.acceleration['x'], -10000)
+            if t.transform.position['y'] > h - cls.pixels * cls.scale:
+                t.set_velocity(t.kinematics.velocity['x'], -cls.speed)
+                #t.set_acceleration(t.kinematics.acceleration['x'], -10000)
             elif t.transform.position['y'] < 0:
-                t.change_velocity(t.kinematics.velocity['x'], cls.speed)
-                #t.change_acceleration(t.kinematics.acceleration['x'], 10000)
+                t.set_velocity(t.kinematics.velocity['x'], cls.speed)
+                #t.set_acceleration(t.kinematics.acceleration['x'], 10000)
+        if not cls.changed_position and GameManager.current_time - cls.start_time > 2:
+            print(GameManager.current_time - cls.start_time)
+            t = cls.scene.active_entities["trunk" + str(0)]
+            t.set_scale(2, 2)
+            cls.changed_position = True
 
 GameManager.init()
 
