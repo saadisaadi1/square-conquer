@@ -2,13 +2,11 @@ import time
 import pygame
 import copy
 import random
-
+from enum import Enum
 
 class Entity:
     def __init__(self, name, animations_pack):
         self.children = []
-        self.scene = GameManager.current_scene
-        self.switch = False
         self.father = None
         self.name = name
         self.transform = self.Transform()
@@ -26,14 +24,15 @@ class Entity:
 
     def set_father(self, father):
         self.father = father
-        GameManager.scenes[self.scene].initial_entities[father].children.append(self.name)
+        GameManager.scenes[GameManager.current_scene].initial_entities[father].children.append(self.name)
 
     def add_kinematics(self, x_velocity=0, y_velocity=0, x_acceleration=0, y_acceleration=0):
         self.kinematics = self.Kinematics(x_velocity, y_velocity, x_acceleration, y_acceleration)
 
     def set_velocity(self, x, y):
         for child_name in self.children:
-            child = GameManager.scenes[self.scene].active_entities[child_name]
+            print(GameManager.status)
+            child = GameManager.current_change_entities[child_name]
             child.set_velocity(x + child.kinematics.velocity['x'] - self.kinematics.velocity['x'],
                                   y + child.kinematics.velocity['y'] - self.kinematics.velocity['y'])
         if self.kinematics is not None:
@@ -42,18 +41,12 @@ class Entity:
 
     def set_acceleration(self, x, y):
         for child_name in self.children:
-            child = GameManager.scenes[self.scene].active_entities[child_name]
+            child = GameManager.current_change_entities[child_name]
             child.set_acceleration(x + child.kinematics.acceleration['x'] - self.kinematics.acceleration['x'],
                                   y + child.kinematics.acceleration['y'] - self.kinematics.acceleration['y'])
         if self.kinematics is not None:
             self.kinematics.acceleration['x'] = x
             self.kinematics.acceleration['y'] = y
-
-    def updated(self):
-        return self.switch == GameManager.entity_update_switch
-
-    def flip_switch(self):
-        self.switch = not self.switch
 
     def update(self):
         if self.animator is not None:
@@ -66,7 +59,7 @@ class Entity:
 
     def set_position(self, x, y):
         for child_name in self.children:
-            child = GameManager.scenes[self.scene].active_entities[child_name]
+            child = GameManager.current_change_entities[child_name]
             child.set_position(x + child.transform.position['x'] - self.transform.position['x'],
                                   y + child.transform.position['y'] - self.transform.position['y'])
         self.transform.position['x'] = x
@@ -74,7 +67,7 @@ class Entity:
 
     def set_scale(self, x, y):
         for child_name in self.children:
-            child = GameManager.scenes[self.scene].active_entities[child_name]
+            child = GameManager.current_change_entities[child_name]
             child.set_scale(x * child.transform.scale['x'] / self.transform.scale['x'],
                                   y * child.transform.scale['y'] / self.transform.scale['y'])
         self.transform.scale['x'] = x
@@ -168,8 +161,14 @@ class Scene:
         self.active_entities = {}
 
 
+class Status(Enum):
+    INITIAL = 1
+    TEMPORARY = 2
+
+
 class GameManager:
-    entity_update_switch = True
+    status = Status.INITIAL
+    current_change_entities = None
     current_scene = None
     scenes = {}
     fps = 60
@@ -186,9 +185,15 @@ class GameManager:
         pygame.init()
         cls.win = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         cls.run_game()
+
     @classmethod
-    def flip_switch(cls):
-        cls.entity_update_switch = not cls.entity_update_switch
+    def change_status(cls):
+        if cls.status == Status.TEMPORARY:
+            cls.status = Status.INITIAL
+            cls.current_change_entities = cls.scenes[cls.current_scene].initial_entities
+        else:
+            cls.status = Status.TEMPORARY
+            cls.current_change_entities = cls.scenes[cls.current_scene].active_entities
 
     @classmethod
     def update_time(cls):
@@ -204,6 +209,7 @@ class GameManager:
     @classmethod
     def run_game(cls):
         Game.start()
+        cls.change_status()
         cls.scenes[cls.current_scene].start()
         cls.start_time()
         while cls.run:
@@ -237,6 +243,10 @@ class GameManager:
     @classmethod
     def change_current_scene(cls, scene):
         cls.current_scene = scene
+        if cls.status == Status.INITIAL:
+            cls.current_change_entities = cls.scenes[cls.current_scene].initial_entities
+        else:
+            cls.current_change_entities = cls.scenes[cls.current_scene].active_entities
 
     # add new scene to the game
     @classmethod
@@ -246,7 +256,7 @@ class GameManager:
 
     # adds new animation pack to the game
     @classmethod
-    def create_new_type(cls, kind):
+    def create_new_animations_pack(cls, kind):
         cls.animations_packs[kind] = AnimationsPack()
 
     # adds animation to a animation pack
@@ -284,24 +294,25 @@ class Game:
     def start(cls):
         cls.scene = GameManager.create_new_scene("example scene")
         GameManager.change_current_scene("example scene")
-        GameManager.create_new_type("trunk")
+        GameManager.create_new_animations_pack("trunk")
         GameManager.create_new_animaton("trunk", 5, "happy", "animations/human idle.png", cls.pixels, cls.pixels, True, 2)
         trunks = []
         for i in range(cls.trunks_number):
             cls.speed = random.randint(100, 500)
             trunks.append(GameManager.create_new_entity("trunk", "trunk" + str(i), "initial"))
-            trunks[i].add_kinematics(cls.speed, cls.speed)
+            trunks[i].add_kinematics()
             trunks[i].set_scale(cls.scale, cls.scale)
         cls.son = GameManager.create_new_entity("trunk", "son", "initial")
-        cls.son.add_kinematics(cls.speed, cls.speed)
+        cls.son.add_kinematics(0, 0)
         cls.son.set_father("trunk0")
         cls.son.set_position(100, 100)
         cls.start_time = time.time()
         cls.son1 = GameManager.create_new_entity("trunk", "son1", "initial")
-        cls.son1.add_kinematics(cls.speed, cls.speed)
+        cls.son1.add_kinematics(0, 0)
         cls.son1.set_father("son")
         cls.son1.set_position(200, 200)
         cls.start_time = time.time()
+        trunks[0].set_velocity(100, 100)
     @classmethod
     def update(cls):
         for i in range(cls.trunks_number):
