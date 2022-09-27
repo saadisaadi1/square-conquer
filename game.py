@@ -1,11 +1,11 @@
 from framework import GameManager
 from random import Random
 
-class character:
+class Character:
     pass
 
 
-class board:
+class Board:
     def __init__(self, board_size): # think about proper data structures before implementing maybe you should change some stuff that you have already written
         self.board_size = board_size
         self.entity = GameManager.create_new_entity() # fill the details

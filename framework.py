@@ -1,9 +1,13 @@
 import time
+
+import pandas
 import pygame
 import copy
 import random
 import bisect
+import pandas as pd
 from enum import Enum
+
 
 class Entity:
     def __init__(self, name, animations_pack, layer = 0):
@@ -26,8 +30,10 @@ class Entity:
         return new_entity
 
     def set_father(self, father):
+        if self.father is not None:
+            GameManager.current_change_entities[self.father].children.remove(self.name)
         self.father = father
-        GameManager.scenes[GameManager.current_scene].initial_entities[father].children.append(self.name)
+        GameManager.current_change_entities[father].children.append(self.name)
 
     def add_kinematics(self, x_velocity=0, y_velocity=0, x_acceleration=0, y_acceleration=0):
         self.kinematics = self.Kinematics(x_velocity, y_velocity, x_acceleration, y_acceleration)
@@ -97,7 +103,7 @@ class Entity:
 
         def update(self):
             animation = self.animations_pack.animations[self.current_animation]
-            if GameManager.current_time > self.last_updated + 0.1 / animation.speed:
+            if GameManager.current_time > self.last_updated + animation.time /animation.frames_number:
                 self.last_updated = GameManager.current_time
                 if animation.frames_number > 1:
                     if self.current_frame < animation.frames_number - 1:
@@ -115,8 +121,8 @@ class Entity:
 
 
 class Animation:
-    def __init__(self, frames_number, file_name, frame_width, frame_height, loop, speed):
-        self.speed = speed
+    def __init__(self, frames_number, file_name, frame_width, frame_height, loop, time):
+        self.time = time
         self.frames_number = frames_number
         self.frames = self.generate_frames(file_name, frame_width, frame_height)
         self.loop = loop
@@ -142,7 +148,7 @@ class AnimationsPack:
         self.default_animation = None
         self.animations = {}
 
-    def add_animation(self, frames_number, name, file_name, frame_width, frame_height, loop, speed):
+    def add_animation(self, name, file_name, frames_number, frame_width, frame_height, speed, loop):
         new_animation = Animation(frames_number, file_name, frame_width, frame_height, loop, speed)
         if self.default_animation is None:
             self.default_animation = name
@@ -151,10 +157,25 @@ class AnimationsPack:
     def set_default_animation(self, name):
         self.default_animation = name
 
+class PacksLoader:
+    packs_file = "packs_file.xlsx"
+    packs_df = pandas.read_excel(packs_file)
+    xl = pandas.ExcelFile(packs_file)
+
+    @classmethod
+    def load_packs(cls):
+        for name in cls.xl.sheet_names:
+            pack_sheet = cls.xl.parse(name)
+            GameManager.create_new_animations_pack(name)
+            animations_list = list(pack_sheet.to_records(index=False))
+            for animation in animations_list:
+                GameManager.create_new_animation(name, *animation)
+
 
 class Scene:
     def __init__(self):
-        self.initial_entities = {}
+        self.root_entity = Entity("root", None)
+        self.initial_entities = {"root": self.root_entity}
         self.active_entities = {}
         self.layers_list = []
         self.layers_dict = {}
@@ -170,7 +191,8 @@ class Scene:
 
     def add_active_entity(self, entity):
         self.active_entities[entity.name] = entity
-        self.add_new_layer(entity)
+        if entity.renderer is not None:
+            self.add_new_layer(entity)
 
     def start(self):
         for entity_name in self.initial_entities:
@@ -181,6 +203,7 @@ class Scene:
         self.active_entities = {}
         self.layers_dict = {}
         self.layers_list = {}
+
 
 class Timer:
     def __init__(self, time_limit):
@@ -201,6 +224,7 @@ class Timer:
     def change_time_limit(self, new_time_limit):
         self.time += new_time_limit - self.limit
         self.limit = new_time_limit
+
 
 class Status(Enum):
     INITIAL = 1
@@ -250,6 +274,7 @@ class GameManager:
 
     @classmethod
     def run_game(cls):
+        PacksLoader.load_packs()
         Game.start()
         cls.change_status()
         cls.scenes[cls.current_scene].start()
@@ -309,22 +334,25 @@ class GameManager:
 
     # adds animation to a animation pack
     @classmethod
-    def create_new_animation(cls, kind, frames_number, name, file_name, frame_width, frame_height, loop, speed):
-        cls.animations_packs[kind].add_animation(frames_number, name, file_name, frame_width, frame_height, loop, speed)
+    def create_new_animation(cls, kind, name, file_name, frames_number, frame_width, frame_height, speed, loop):
+        cls.animations_packs[kind].add_animation(name, file_name, frames_number, frame_width, frame_height, speed, loop)
 
     # create an entity of the game , this function can be used in 2 ways
     # 1) add an entity to a scene that each time you load the scene , the scene starts with this entity
     #   (status = "initial")
     # 2) add an entity in the middle of the game while the game is running (status = "temporary"
     @classmethod
-    def create_new_entity(cls, kind, name, status="temporary"):
+    def create_new_entity(cls, kind, name, status="temporary",father = None):
         entity = Entity(name, cls.animations_packs[kind])
+        if father is not None:
+            entity.set_father(father)
+        else:
+            entity.set_father("root")
         if status == "initial":
             cls.scenes[cls.current_scene].add_initial_entity(entity)
         else:
             cls.scenes[cls.current_scene].add_entity(entity)
         return entity
-
 
 # framework executable code --------------------------------
 class Game:
@@ -343,21 +371,19 @@ class Game:
     def start(cls):
         cls.scene = GameManager.create_new_scene("example scene")
         GameManager.change_current_scene("example scene")
-        GameManager.create_new_animations_pack("trunk")
-        GameManager.create_new_animation("trunk", 4, "happy", "animations/human idle.png", cls.pixels, cls.pixels, True, 4)
         trunks = []
         for i in range(cls.trunks_number):
-            trunks.append(GameManager.create_new_entity("trunk", "trunk" + str(i), "initial"))
+            trunks.append(GameManager.create_new_entity("frog", "frog" + str(i), "initial"))
             trunks[i].add_kinematics()
             #if i != 0:
             trunks[i].set_velocity(cls.speed, cls.speed)
             trunks[i].set_scale(cls.scale, cls.scale)
-        """cls.son = GameManager.create_new_entity("trunk", "son", "initial")
+        """cls.son = GameManager.create_new_entity("frog", "son", "initial")
         cls.son.add_kinematics(0, 0)
         cls.son.set_father("trunk0")
         cls.son.set_position(100, 100)
         cls.start_time = time.time()
-        cls.son1 = GameManager.create_new_entity("trunk", "son1", "initial")
+        cls.son1 = GameManager.create_new_entity("frog", "son1", "initial")
         cls.son1.add_kinematics(0, 0)
         cls.son1.set_father("son")
         cls.son1.set_position(200, 200)
@@ -371,7 +397,7 @@ class Game:
             print(1/GameManager.delta_time)
         for i in range(cls.trunks_number):
             cls.speed = random.randint(100, 500)
-            t = cls.scene.active_entities["trunk" + str(i)]
+            t = cls.scene.active_entities["frog" + str(i)]
             w, h = pygame.display.get_surface().get_size()
             if t.transform.position['x'] > w - cls.pixels * cls.scale:
                 t.set_velocity(-cls.speed, t.kinematics.velocity['y'])
