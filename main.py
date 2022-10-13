@@ -1,5 +1,5 @@
 from framework import GameManager, PacksLoader
-from scenesImporter import ScenesImporter
+from scenes_importer import ScenesImporter
 import pygame
 
 
@@ -13,6 +13,7 @@ def run_game():
         GameManager.scenes[GameManager.current_scene].start()
         while GameManager.run:
             if GameManager.changing_scene:
+                GameManager.changing_scene = False
                 break
             GameManager.update_time()
             GameManager.notifications = {}
@@ -20,11 +21,10 @@ def run_game():
                 if event.type == pygame.QUIT:
                     GameManager.run = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    GameManager.notifications["mouse clicked"] = pygame.mouse.get_pos()
-                    print(GameManager.notifications["mouse clicked"])
+                    GameManager.notifications["mouse clicked"] = None
             GameManager.scenes[GameManager.current_scene].update()
             GameManager.draw_entities()
-        pygame.quit()
+    pygame.quit()
 
 if __name__ == '__main__':
     run_game()

@@ -75,6 +75,12 @@ class Entity:
         self.transform.position['x'] = x
         self.transform.position['y'] = y
 
+    def set_center_position(self, x, y):
+        width, height = self.get_size()
+        top_left_x = x - width/2
+        top_left_y = y - height/2
+        self.set_position(x, y)
+
     def set_scale(self, x, y):
         for child_name in self.children:
             child = GameManager.current_change_entities[child_name]
@@ -82,6 +88,32 @@ class Entity:
                             y * child.transform.scale['y'] / self.transform.scale['y'])
         self.transform.scale['x'] = x
         self.transform.scale['y'] = y
+
+    def get_size(self):
+        width = button_width = self.animator.animations_pack.animations[self.animator.current_animation].frame_size['x'] * self.transform.scale['x']
+        height = self.animator.animations_pack.animations[self.animator.current_animation].frame_size['y'] * self.transform.scale['y']
+        return (width, height)
+
+
+    def check_triggered(self):
+        if self.animator is not None:
+            point = pygame.mouse.get_pos()
+            current_animation = self.animator.animations_pack.animations[self.animator.current_animation]
+            current_frame = current_animation.frames[self.animator.current_frame]
+            frame_width = current_animation.frame_size['x']
+            frame_height = current_animation.frame_size['y']
+            rect = current_frame.get_rect()
+            rect.update( self.transform.position['x'], self.transform.position['y'], frame_width * self.transform.scale['x'], frame_height * self.transform.scale['y'])
+            return rect.collidepoint(point)
+        else:
+            return False
+
+
+    def check_clicked(self):
+        if "mouse clicked" in GameManager.notifications:
+            return self.check_triggered()
+        else:
+            return False
 
     class Transform:
         def __init__(self):
@@ -272,14 +304,16 @@ class GameManager:
     def change_current_scene(cls, scene):
         cls.current_scene = scene
         cls.current_change_entities = cls.scenes[cls.current_scene].entities
+        GameManager.changing_scene = True
 
-    # add new scene to the game
+    # loads all the scenes in the given list into the game, the first scene in the list is set to the current scene
     @classmethod
     def load_scenes(cls, scenes):
-        for scene in scenes:
-            scene = scene()
-            cls.scenes[scene.name] = scene
-            return cls.scenes[scene.name]
+        for i, scene in enumerate(scenes):
+            new_scene = scene()
+            cls.scenes[new_scene.name] = new_scene
+            if i == 0:
+                cls.change_current_scene(new_scene.name)
 
     # adds new animation pack to the game
     @classmethod
@@ -293,12 +327,15 @@ class GameManager:
 
     # create an entity of the game , this function can be used in 2 ways
     @classmethod
-    def create_new_entity(cls, kind, name, father = None):
-        entity = Entity(name, cls.animations_packs[kind])
+    def create_new_entity(cls, name, kind, father = None):
+        animation_pack = None
+        if kind in cls.animations_packs:
+            animation_pack = cls.animations_packs[kind]
+        entity = Entity(name, animation_pack)
         if father is not None:
             entity.set_father(father)
         else:
             entity.set_father("root")
-            cls.scenes[cls.current_scene].add_entity(entity)
+        cls.scenes[cls.current_scene].add_entity(entity)
         return entity
 
