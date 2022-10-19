@@ -27,13 +27,14 @@ class StartScene(Scene):
         elif self.buttons["tutorial"].entity.check_clicked():
             GameManager.change_current_scene("experiment scene")
             return
-
+        if "escape" in GameManager.notifications:
+            pygame.quit()
 
 
 class Button:
     max_scale = 1
     min_scale = 0.5
-    scaling_speed = 0.05
+    scaling_speed = 5
 
     def __init__(self, name):
         self.entity = GameManager.create_new_entity(name, "Start menu button")
@@ -41,7 +42,7 @@ class Button:
 
     def scale_when_hover(self):
         if self.entity.check_triggered():
-            self.entity.set_scale(min(self.max_scale, self.entity.transform.scale['x'] + self.scaling_speed), min(self.max_scale, self.entity.transform.scale['y'] + self.scaling_speed))
+            self.entity.set_scale(min(self.max_scale, self.entity.transform.scale['x'] + self.scaling_speed * GameManager.delta_time), min(self.max_scale, self.entity.transform.scale['y'] + self.scaling_speed * GameManager.delta_time))
         else:
-            self.entity.set_scale(max(self.min_scale, self.entity.transform.scale['x'] - self.scaling_speed), max(self.min_scale, self.entity.transform.scale['y'] - self.scaling_speed))
+            self.entity.set_scale(max(self.min_scale, self.entity.transform.scale['x'] - self.scaling_speed * GameManager.delta_time), max(self.min_scale, self.entity.transform.scale['y'] - self.scaling_speed * GameManager.delta_time))
 

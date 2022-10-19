@@ -5,6 +5,7 @@ import pygame
 
 def run_game():
     pygame.init()
+    pygame.font.init()
     GameManager.win = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     PacksLoader.load_packs()
     ScenesImporter.load_scenes()
@@ -20,8 +21,14 @@ def run_game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     GameManager.run = False
+                elif event.type == pygame.MOUSEWHEEL:
+                    GameManager.notifications["mouse wheel"] = event.y
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    GameManager.notifications["mouse clicked"] = None
+                    if event.button in [1, 2]:
+                        GameManager.notifications["mouse clicked"] = None
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        GameManager.notifications["escape"] = None
             GameManager.scenes[GameManager.current_scene].update()
             GameManager.draw_entities()
     pygame.quit()
