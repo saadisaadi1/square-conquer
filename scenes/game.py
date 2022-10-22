@@ -8,7 +8,8 @@ class Board:
         self.statistics = {"score": [0, 0],
                            "square": [0, 0],
                            "frog": [0, 0],
-                           "snowy": [0, 0]
+                           "snowy": [0, 0],
+                           "chick": [0, 0]
                            }
         self.turn = 1
         self.font_size = 120
@@ -35,6 +36,7 @@ class Board:
         for i in range(self.board_size['x'] + 1):
             for j in range(self.board_size['y'] + 1):
                 self.dots[(i, j)] = GameManager.create_new_entity(name = "dot" + str(i) + str(j), kind = "Dot", father = "board", layer = 3)
+                self.dots[(i,j)].set_scale(0.5, 0.5)
                 self.dots[(i, j)].align(self.entity.transform.position['x'] + j * self.square_side_length, self.entity.transform.position['y'] + i * self.square_side_length, (50, 50))
 
         for i in range(self.board_size['x']):
@@ -59,7 +61,8 @@ class Board:
     def fill_with_characters(self): #of course you have to use random here in a smart way
         for i in range(self.board_size['x']):
             for j in range(self.board_size['y']):
-                character = random.choice([Snowy, Frog])
+                character = random.choice([Frog, Snowy, Chick])
+
                 self.characters[(i, j)] = character((i, j), self) #random.choice([Snowy((i, j), self), Frog((i, j), self)])
                 self.characters[(i, j)].entity.align_to_other_entity(other_entity = self.squares[(i, j)].entity, other_alignment = (50, 50), alignment = (50, 50))
         for key in self.characters:
@@ -78,8 +81,10 @@ class Board:
         win_x, win_y = GameManager.win.get_size()
         self.max_scale = min(win_x * (2/3) / self.width, win_y * (2/3) / self.height)
         self.min_scale = min(self.min_scale, self.max_scale/2)
-        #new_scale = (self.max_scale - self.min_scale)/2
-        #self.entity.set_scale(new_scale, new_scale)
+        initial_scale = (self.max_scale + self.min_scale)/2
+        self.width *= initial_scale
+        self.height *= initial_scale
+        self.entity.set_scale(initial_scale, initial_scale)
 
     def scroll_and_scale(self):
         if "mouse wheel" in GameManager.notifications:
@@ -93,9 +98,6 @@ class Board:
             self.width *= new_scale/old_scale
             self.height *= new_scale/old_scale
             self.entity.set_scale(new_scale, new_scale)
-
-    def align(self):
-        pass
 
     def check_game_ended(self):
         if sum(self.statistics["square"]) == self.board_size['x'] * self.board_size['y']:
@@ -112,7 +114,7 @@ class Board:
         for key in self.highlighted_lines:
            self.update_line(key)
         if self.check_valid_square_coordinates(i, j):
-            self.card.animator.current_animation = self.characters[(i, j)].character
+            self.card.animator.change_animation(self.characters[(i, j)].character)
             self.update_line(("v", i, j))
             self.update_line(("v", i, j + 1))
             self.update_line(("h", i, j))
@@ -177,7 +179,7 @@ class Board:
     def check_full_square(self, i, j):
         if self.check_valid_square_coordinates(i, j):
             if self.lines[("v", i, j)].clicked and self.lines[("v", i, j + 1)].clicked and  self.lines[("h", i, j)].clicked and self.lines[("h", i + 1, j)].clicked:
-                self.squares[(i, j)].entity.animator.current_animation = "color " + str(self.turn)
+                self.squares[(i, j)].entity.animator.change_animation("color " + str(self.turn))
                 return "full"
         return "empty"
 
@@ -196,15 +198,15 @@ class Line():
         color = "black"
         if not self.clicked:
             if self.entity.check_triggered():
-                self.entity.animator.current_animation = "gray" + self.type_string
+                self.entity.animator.change_animation("gray" + self.type_string)
                 color = "gray"
             else:
-                self.entity.animator.current_animation = "empty" + self.type_string
+                self.entity.animator.change_animation("empty" + self.type_string)
                 color = "transparent"
 
             if self.entity.check_clicked():
                 self.clicked = True
-                self.entity.animator.current_animation = "black" + self.type_string
+                self.entity.animator.change_animation("black" + self.type_string)
                 color = "new black"
         return color
 
@@ -214,14 +216,14 @@ class VerticalLine(Line):
     def __init__(self, name):
         super().__init__(name)
         self.type_string = " vl"
-        self.entity.animator.current_animation = "empty" + self.type_string
+        self.entity.animator.change_animation("empty" + self.type_string)
 
 
 class HorizontalLine(Line):
     def __init__(self, name):
         super().__init__(name)
         self.type_string = " hl"
-        self.entity.animator.current_animation = "empty" + self.type_string
+        self.entity.animator.change_animation("empty" + self.type_string)
 
 
 class Square():
@@ -268,6 +270,7 @@ class Frog(Character):
         super().__init__(coordinates, board)
         self.character = "frog"
         self.entity = GameManager.create_new_entity("character" + str(coordinates[0]) + str(coordinates[1]), "Frog", "board", 5)
+        self.entity.set_scale(0.5, 0.5)
 
     def add_character_to_effective_squares(self):
         for i in range(self.board.board_size['x']):
@@ -277,7 +280,7 @@ class Frog(Character):
 
     def appear(self, player):
         super().appear(player)
-        self.entity.animator.current_animation = "regular"
+        self.entity.animator.change_animation("regular")
         self.set_score(1)
 
     def update_status_and_score(self, i, j):
@@ -286,8 +289,8 @@ class Frog(Character):
             amount_of_frogs = (self.board.statistics["frog"])[0]
         elif self.player == 2:
             amount_of_frogs = (self.board.statistics["frog"])[1]
-        if amount_of_frogs >= 5:
-            self.entity.animator.current_animation = "happy"
+        if amount_of_frogs >= 2:
+            self.entity.animator.change_animation("happy")
             self.set_score(2)
 
 class Snowy(Character):
@@ -295,6 +298,7 @@ class Snowy(Character):
         super().__init__(coordinates, board)
         self.character = "snowy"
         self.entity = GameManager.create_new_entity("character" + str(coordinates[0]) + str(coordinates[1]), "Snowy", "board", 5)
+        self.entity.set_scale(0.5, 0.5)
 
     def add_character_to_effective_squares(self):
         for i in range(self.board.board_size['x']):
@@ -304,7 +308,7 @@ class Snowy(Character):
 
     def appear(self, player):
         super().appear(player)
-        self.entity.animator.current_animation = "regular"
+        self.entity.animator.change_animation("sad")
         self.set_score(1)
 
     def update_status_and_score(self, i, j):
@@ -313,8 +317,36 @@ class Snowy(Character):
             amount_of_frogs = (self.board.statistics["snowy"])[0]
         elif self.player == 2:
             amount_of_frogs = (self.board.statistics["snowy"])[1]
-        if amount_of_frogs >= 5:
-            self.entity.animator.current_animation = "happy"
+        if amount_of_frogs >= 2:
+            self.entity.animator.change_animation("happy")
+            self.set_score(-20)
+
+class Chick(Character):
+    def __init__(self, coordinates, board):
+        super().__init__(coordinates, board)
+        self.character = "chick"
+        self.entity = GameManager.create_new_entity("character" + str(coordinates[0]) + str(coordinates[1]), "Chick", "board", 5)
+        self.entity.set_scale(0.5, 0.5)
+
+    def add_character_to_effective_squares(self):
+        for i in range(self.board.board_size['x']):
+            for j in range(self.board.board_size['y']):
+                if isinstance(self.board.characters[(i, j)], Chick):
+                    self.board.squares[(i, j)].characters[(self.coordinates[0], self.coordinates[1])] = self
+
+    def appear(self, player):
+        super().appear(player)
+        self.entity.animator.change_animation("regular")
+        self.set_score(1)
+
+    def update_status_and_score(self, i, j):
+        amount_of_frogs = None
+        if self.player == 1:
+            amount_of_frogs = (self.board.statistics["chick"])[0]
+        elif self.player == 2:
+            amount_of_frogs = (self.board.statistics["chick"])[1]
+        if amount_of_frogs >= 2:
+            self.entity.animator.change_animation("happy")
             self.set_score(-20)
 
 
@@ -330,7 +362,7 @@ class GameScene(Scene):
 
     def start(self):
         self.board = Board((7, 9))
-        self.board.entity.set_position(640, 200)
+        self.put_board_in_place()
         self.layout = GameManager.create_new_entity(name = "layout", kind = "Layout", layer = 0)
         self.put_card_in_place()
         self.put_board_in_place()
@@ -340,9 +372,11 @@ class GameScene(Scene):
         self.board.update()
         self.board.scroll_and_scale()
         self.put_board_in_place()
+        if GameManager.delta_time != 0:
+            print("fps = ", 1/ GameManager.delta_time)
         if "escape" in GameManager.notifications:
             GameManager.change_current_scene("start scene")
-        elif "R" in GameManager.notifications():
+        elif "r" in GameManager.notifications:
             GameManager.change_current_scene("game scene")
 
     def put_board_in_place(self):

@@ -29,6 +29,8 @@ def run_game():
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         GameManager.notifications["escape"] = None
+                    elif event.key == pygame.K_r:
+                        GameManager.notifications["r"] = None
             GameManager.scenes[GameManager.current_scene].update()
             GameManager.draw_entities()
     pygame.quit()

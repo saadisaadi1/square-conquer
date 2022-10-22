@@ -16,7 +16,7 @@ class ExperimentScene(Scene):
         self.start_time = GameManager.current_time
         self.changed_position = False
         self.timer = Timer(2)
-        self.scale_by = 0
+        self.scale_by = 0.1
         self.text = None
         self.font = None
         super().__init__()
@@ -73,9 +73,11 @@ class ExperimentScene(Scene):
             if not self.timer.time_up:
                 self.timer.update()
             else:
-                self.entities["frog" + str(0)].set_scale(1.1, 1.1)
+                self.entities["frog" + str(0)].set_scale(1+self.scale_by, 1+self.scale_by)
                 self.entities["frog" + str(0)].set_position(300, 300)
                 self.changed_position = True
                 self.timer.restart()
-                self.scale_by += 1/2
+                self.scale_by += 0.1
 
+        if "escape" in GameManager.notifications:
+            GameManager.change_current_scene("start scene")
